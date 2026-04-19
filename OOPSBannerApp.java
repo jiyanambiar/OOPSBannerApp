@@ -1,14 +1,61 @@
+import java.util.HashMap;
+import java.util.Map;
 
-public class OOPSBannerApp {
+public class OOPSBannerUC8 {
+
+    // Map to store patterns
+    static Map<Character, String[]> patternMap = new HashMap<>();
+
+    // Initialize patterns
+    static {
+        patternMap.put('O', new String[]{
+                " *** ",
+                "*   *",
+                "*   *",
+                "*   *",
+                " *** "
+        });
+
+        patternMap.put('P', new String[]{
+                "**** ",
+                "*   *",
+                "**** ",
+                "*    ",
+                "*    "
+        });
+
+        patternMap.put('S', new String[]{
+                " ****",
+                "*    ",
+                " *** ",
+                "    *",
+                "**** "
+        });
+    }
+
+    // Render function
+    public static void renderBanner(String word) {
+
+        int height = 5;
+
+        for (int i = 0; i < height; i++) {
+            StringBuilder line = new StringBuilder();
+
+            for (char ch : word.toCharArray()) {
+                String[] pattern = patternMap.get(ch);
+
+                if (pattern != null) {
+                    line.append(pattern[i]).append("  ");
+                } else {
+                    line.append("????  "); // fallback
+                }
+            }
+
+            System.out.println(line);
+        }
+    }
+
     public static void main(String[] args) {
-        System.out.println("   ***    " + "   ***    " + "******    " + "   *****");
-        System.out.println(" **   **  " + " **   **  " + "**    **  " + " **     ");
-        System.out.println("**     ** " + "**     ** " + "**     ** " + "**      ");
-        System.out.println("**     ** " + "**     ** " + "**    **  " + " **     ");
-        System.out.println("**     ** " + "**     ** " + "******    " + "   ***  ");
-        System.out.println("**     ** " + "**     ** " + "**        " + "      **");
-        System.out.println("**     ** " + "**     ** " + "**        " + "       **");
-        System.out.println(" **   **  " + " **   **  " + "**        " + "      **");
-        System.out.println("   ***    " + "   ***    " + "**        " + " *****");
+        renderBanner("OOPS");
     }
 }
